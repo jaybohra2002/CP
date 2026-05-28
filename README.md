@@ -1,13 +1,13 @@
-# Competitive Programming Journey 🚀
+# Competitive Programming
 
-Welcome to my Competitive Programming repository! This repo tracks my learning progress, templates, algorithms, and contest solutions as I master DSA and Competitive Programming.
+This is my Competitive Programming repository.
 
 ---
 
 ## 🛠️ Environment & Setup
 
 - **Language:** C++23
-- **Compiler:** MSYS2 (UCRT64 GCC)
+- **Compiler:** MSYS2 (UCRT64 GCC) As of Now.
 - **Editor:** VS Code
 - **Build System:** Custom VS Code Tasks with central I/O redirection
 
@@ -54,13 +54,4 @@ CP/
 
 ---
 
-## 📚 Topics & Learning Progress
 
-- [ ] **Basics & STL**
-- [ ] **Binary Search**
-  - [x] Template setup
-- [ ] **DSU (Disjoint Set Union)**
-- [ ] **Dynamic Programming**
-- [ ] **Graphs (BFS/DFS, Dijkstra, MST)**
-- [ ] **Number Theory & Modular Arithmetic**
-- [ ] **Segment Trees & Fenwick Trees**
