@@ -1,0 +1,25 @@
+# Ignore compiled binaries (executables)
+*.exe
+*_san.exe
+bin/
+build/
+out/
+
+# Ignore C++ object/precompiled files
+*.o
+*.obj
+*.gch
+*.pch
+
+# Ignore local input/output test files
+input.txt
+output.txt
+expected.txt
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
+
+# Ignore VS Code workspace state (but keep tasks and snippets)
+.vscode/.react/
+.vscode/project.json

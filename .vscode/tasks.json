@@ -1,0 +1,86 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "CP: Compile Only",
+            "type": "shell",
+            "command": "C:/msys64/ucrt64/bin/g++.exe",
+            "args": [
+                "${file}",
+                "-o", "${fileDirname}/${fileBasenameNoExtension}.exe",
+                "-std=c++23",
+                "-Wall", "-Wextra",
+                "-O2",
+                "-fdiagnostics-color=always"
+            ],
+            "options": { "cwd": "${fileDirname}" },
+            "problemMatcher": "$gcc",
+            "group": { "kind": "build", "isDefault": true },
+            "presentation": { "reveal": "silent", "panel": "shared" }
+        },
+        {
+            "label": "CP: Run with I/O (Compile + Run)",
+            "type": "shell",
+            "command": "C:/msys64/ucrt64/bin/g++.exe",
+            "args": [
+                "${file}",
+                "-o", "${fileDirname}/${fileBasenameNoExtension}.exe",
+                "-std=c++23",
+                "-Wall", "-Wextra",
+                "-O2",
+                "-fdiagnostics-color=always",
+                "&&",
+                "${fileDirname}/${fileBasenameNoExtension}.exe",
+                "<", "${workspaceFolder}/input.txt",
+                ">", "${workspaceFolder}/output.txt"
+            ],
+            "options": { "cwd": "${fileDirname}", "shell": { "executable": "cmd.exe", "args": ["/c"] } },
+            "problemMatcher": "$gcc",
+            "group": "build",
+            "presentation": { "reveal": "always", "panel": "shared" }
+        },
+        {
+            "label": "CP: Run Only with I/O (no recompile)",
+            "type": "shell",
+            "command": "${fileDirname}/${fileBasenameNoExtension}.exe",
+            "args": ["<", "${workspaceFolder}/input.txt", ">", "${workspaceFolder}/output.txt"],
+            "options": { "cwd": "${fileDirname}", "shell": { "executable": "cmd.exe", "args": ["/c"] } },
+            "problemMatcher": [],
+            "group": "build",
+            "presentation": { "reveal": "always", "panel": "shared" }
+        },
+        {
+            "label": "CP: Sanitizer Build + Run (Debug)",
+            "type": "shell",
+            "command": "C:/msys64/ucrt64/bin/g++.exe",
+            "args": [
+                "${file}",
+                "-o", "${fileDirname}/${fileBasenameNoExtension}_san.exe",
+                "-std=c++23",
+                "-Wall", "-Wextra",
+                "-g",
+                "-fsanitize=address,undefined",
+                "-D_GLIBCXX_DEBUG",
+                "-fdiagnostics-color=always",
+                "&&",
+                "${fileDirname}/${fileBasenameNoExtension}_san.exe",
+                "<", "${workspaceFolder}/input.txt",
+                ">", "${workspaceFolder}/output.txt"
+            ],
+            "options": { "cwd": "${fileDirname}", "shell": { "executable": "cmd.exe", "args": ["/c"] } },
+            "problemMatcher": "$gcc",
+            "group": "build",
+            "presentation": { "reveal": "always", "panel": "shared" }
+        },
+        {
+            "label": "CP: Compare output vs expected",
+            "type": "shell",
+            "command": "fc",
+            "args": ["${workspaceFolder}/output.txt", "${workspaceFolder}/expected.txt"],
+            "options": { "cwd": "${fileDirname}", "shell": { "executable": "cmd.exe", "args": ["/c"] } },
+            "problemMatcher": [],
+            "group": "test",
+            "presentation": { "reveal": "always", "panel": "shared" }
+        }
+    ]
+}

@@ -1,0 +1,259 @@
+{
+    "CP Main Template": {
+        "prefix": "cp",
+        "body": [
+            "#include <bits/stdc++.h>",
+            "using namespace std;",
+            "using ll = long long;",
+            "using pii = pair<int,int>;",
+            "using pll = pair<ll,ll>;",
+            "using vi = vector<int>;",
+            "using vll = vector<ll>;",
+            "#define all(x) (x).begin(), (x).end()",
+            "#define rall(x) (x).rbegin(), (x).rend()",
+            "#define pb push_back",
+            "#define fi first",
+            "#define se second",
+            "#define sz(x) (int)(x).size()",
+            "",
+            "int main() {",
+            "    ios_base::sync_with_stdio(false);",
+            "    cin.tie(nullptr);",
+            "",
+            "    $0",
+            "",
+            "    return 0;",
+            "}"
+        ],
+        "description": "CP main template with common aliases"
+    },
+
+    "CP Multi-Test Template": {
+        "prefix": "cpt",
+        "body": [
+            "#include <bits/stdc++.h>",
+            "using namespace std;",
+            "using ll = long long;",
+            "using pii = pair<int,int>;",
+            "using vi = vector<int>;",
+            "#define all(x) (x).begin(), (x).end()",
+            "#define pb push_back",
+            "",
+            "void solve() {",
+            "    $0",
+            "}",
+            "",
+            "int main() {",
+            "    ios_base::sync_with_stdio(false);",
+            "    cin.tie(nullptr);",
+            "    int t;",
+            "    cin >> t;",
+            "    while (t--) solve();",
+            "    return 0;",
+            "}"
+        ],
+        "description": "CP template with T test cases"
+    },
+
+    "DSU (Union-Find)": {
+        "prefix": "dsu",
+        "body": [
+            "struct DSU {",
+            "    vector<int> parent, rank_;",
+            "    DSU(int n) : parent(n), rank_(n, 0) {",
+            "        iota(all(parent), 0);",
+            "    }",
+            "    int find(int x) {",
+            "        return parent[x] == x ? x : parent[x] = find(parent[x]);",
+            "    }",
+            "    bool unite(int a, int b) {",
+            "        a = find(a); b = find(b);",
+            "        if (a == b) return false;",
+            "        if (rank_[a] < rank_[b]) swap(a, b);",
+            "        parent[b] = a;",
+            "        if (rank_[a] == rank_[b]) rank_[a]++;",
+            "        return true;",
+            "    }",
+            "    bool connected(int a, int b) { return find(a) == find(b); }",
+            "};"
+        ],
+        "description": "Disjoint Set Union with path compression and union by rank"
+    },
+
+    "Fenwick Tree (BIT)": {
+        "prefix": "bit",
+        "body": [
+            "struct BIT {",
+            "    int n;",
+            "    vector<ll> tree;",
+            "    BIT(int n) : n(n), tree(n + 1, 0) {}",
+            "    void update(int i, ll delta) {",
+            "        for (++i; i <= n; i += i & -i) tree[i] += delta;",
+            "    }",
+            "    ll query(int i) {  // prefix sum [0, i]",
+            "        ll s = 0;",
+            "        for (++i; i > 0; i -= i & -i) s += tree[i];",
+            "        return s;",
+            "    }",
+            "    ll query(int l, int r) { return query(r) - (l ? query(l-1) : 0); }",
+            "};"
+        ],
+        "description": "Fenwick Tree / Binary Indexed Tree"
+    },
+
+    "Segment Tree (sum)": {
+        "prefix": "seg",
+        "body": [
+            "struct SegTree {",
+            "    int n;",
+            "    vector<ll> tree;",
+            "    SegTree(int n) : n(n), tree(4 * n, 0) {}",
+            "    void update(int node, int l, int r, int idx, ll val) {",
+            "        if (l == r) { tree[node] = val; return; }",
+            "        int mid = (l + r) / 2;",
+            "        if (idx <= mid) update(2*node, l, mid, idx, val);",
+            "        else update(2*node+1, mid+1, r, idx, val);",
+            "        tree[node] = tree[2*node] + tree[2*node+1];",
+            "    }",
+            "    ll query(int node, int l, int r, int ql, int qr) {",
+            "        if (qr < l || r < ql) return 0;",
+            "        if (ql <= l && r <= qr) return tree[node];",
+            "        int mid = (l + r) / 2;",
+            "        return query(2*node, l, mid, ql, qr) + query(2*node+1, mid+1, r, ql, qr);",
+            "    }",
+            "    void update(int i, ll v) { update(1, 0, n-1, i, v); }",
+            "    ll query(int l, int r) { return query(1, 0, n-1, l, r); }",
+            "};"
+        ],
+        "description": "Segment Tree with point update, range sum query"
+    },
+
+    "Sieve of Eratosthenes": {
+        "prefix": "sieve",
+        "body": [
+            "vector<bool> sieve(int n) {",
+            "    vector<bool> is_prime(n + 1, true);",
+            "    is_prime[0] = is_prime[1] = false;",
+            "    for (int i = 2; (ll)i*i <= n; i++)",
+            "        if (is_prime[i])",
+            "            for (int j = i*i; j <= n; j += i)",
+            "                is_prime[j] = false;",
+            "    return is_prime;",
+            "}"
+        ],
+        "description": "Sieve of Eratosthenes returning is_prime array"
+    },
+
+    "Binary Search": {
+        "prefix": "bsearch",
+        "body": [
+            "// Binary search: find smallest x in [lo, hi] where check(x) is true",
+            "auto bsearch = [&](ll lo, ll hi) -> ll {",
+            "    while (lo < hi) {",
+            "        ll mid = lo + (hi - lo) / 2;",
+            "        if (check(mid)) hi = mid;",
+            "        else lo = mid + 1;",
+            "    }",
+            "    return lo;  // hi is also valid",
+            "};"
+        ],
+        "description": "Binary search lambda for monotone predicate"
+    },
+
+    "Graph BFS": {
+        "prefix": "bfs",
+        "body": [
+            "// BFS from source src, n = number of nodes",
+            "auto bfs = [&](int src, int n, vector<vector<int>>& adj) {",
+            "    vector<int> dist(n, -1);",
+            "    queue<int> q;",
+            "    dist[src] = 0;",
+            "    q.push(src);",
+            "    while (!q.empty()) {",
+            "        int u = q.front(); q.pop();",
+            "        for (int v : adj[u]) {",
+            "            if (dist[v] == -1) {",
+            "                dist[v] = dist[u] + 1;",
+            "                q.push(v);",
+            "            }",
+            "        }",
+            "    }",
+            "    return dist;",
+            "};"
+        ],
+        "description": "BFS shortest path"
+    },
+
+    "Dijkstra": {
+        "prefix": "dijkstra",
+        "body": [
+            "// Dijkstra from src. adj[u] = {v, weight}",
+            "auto dijkstra = [&](int src, int n, vector<vector<pii>>& adj) {",
+            "    vector<ll> dist(n, LLONG_MAX);",
+            "    priority_queue<pll, vector<pll>, greater<pll>> pq;",
+            "    dist[src] = 0;",
+            "    pq.push({0, src});",
+            "    while (!pq.empty()) {",
+            "        auto [d, u] = pq.top(); pq.pop();",
+            "        if (d > dist[u]) continue;",
+            "        for (auto [v, w] : adj[u]) {",
+            "            if (dist[u] + w < dist[v]) {",
+            "                dist[v] = dist[u] + w;",
+            "                pq.push({dist[v], v});",
+            "            }",
+            "        }",
+            "    }",
+            "    return dist;",
+            "};"
+        ],
+        "description": "Dijkstra single-source shortest path"
+    },
+
+    "Modular Arithmetic": {
+        "prefix": "mod",
+        "body": [
+            "const ll MOD = 1e9 + 7;",
+            "ll power(ll base, ll exp, ll mod = MOD) {",
+            "    ll result = 1;",
+            "    base %= mod;",
+            "    while (exp > 0) {",
+            "        if (exp & 1) result = result * base % mod;",
+            "        base = base * base % mod;",
+            "        exp >>= 1;",
+            "    }",
+            "    return result;",
+            "}",
+            "ll inv(ll a, ll mod = MOD) { return power(a, mod - 2, mod); }",
+            "ll add(ll a, ll b) { return (a + b) % MOD; }",
+            "ll mul(ll a, ll b) { return a % MOD * (b % MOD) % MOD; }"
+        ],
+        "description": "Modular exponentiation, inverse, add, mul"
+    },
+
+    "2D Grid directions": {
+        "prefix": "dirs",
+        "body": [
+            "// 4-directional: up, down, left, right",
+            "int dx[] = {-1, 1, 0, 0};",
+            "int dy[] = {0, 0, -1, 1};",
+            "// 8-directional (uncomment if needed):",
+            "// int dx[] = {-1,-1,-1,0,0,1,1,1};",
+            "// int dy[] = {-1,0,1,-1,1,-1,0,1};"
+        ],
+        "description": "Grid direction arrays"
+    },
+
+    "Debug print macro": {
+        "prefix": "dbg",
+        "body": [
+            "#ifdef LOCAL",
+            "#define dbg(x) cerr << #x << \" = \" << (x) << \"\\n\"",
+            "#define dbgv(v) cerr << #v << \" = \"; for(auto& _x:(v)) cerr << _x << ' '; cerr << \"\\n\"",
+            "#else",
+            "#define dbg(x)",
+            "#define dbgv(v)",
+            "#endif"
+        ],
+        "description": "Debug macros that vanish in release build"
+    }
+}

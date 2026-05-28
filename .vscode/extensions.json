@@ -1,0 +1,12 @@
+{
+    "recommendations": [
+        "ms-vscode.cpptools",
+        "ms-vscode.cpptools-extension-pack",
+        "zhuangtongfa.material-theme",
+        "eamodio.gitlens",
+        "usernamehw.errorlens",
+        "formulahendry.code-runner",
+        "streetsidesoftware.code-spell-checker",
+        "vscode-icons-team.vscode-icons"
+    ]
+}
