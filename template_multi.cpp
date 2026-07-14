@@ -14,7 +14,7 @@ using vi = vector<int>;
 #define dbgv(v)
 #endif
 
-void solve() {
+void solve(int test_case) {
     // your code here
 
 }
@@ -24,6 +24,8 @@ int main() {
     cin.tie(nullptr);
     int t;
     cin >> t;
-    while (t--) solve();
+    for (int i = 1; i <= t; i++) {
+        solve(i);
+    }
     return 0;
 }
